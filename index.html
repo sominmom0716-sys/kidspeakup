@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Bilingual English/Korean flashcards and a practice checklist for kids: short phrases for class, games, friends, and tricky moments.">
+<meta name="theme-color" content="#E8F5FF">
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Speak-Up Cards</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Jua&family=Nunito:wght@500;700;800&display=swap">
+<style>
+:root{
+  --bg:#E8F5FF; --dot:#CBE6FB; --surface:#FFFFFF; --ink:#2B2A4C; --muted:#67658A; --line:#D3DDF0;
+  --outline:#2B2A4C; --on-fill:#2B2A4C; --sun:#FFD447; --focus:#5B3FBF;
+  --c-class:#6EC6FF; --c-class-soft:#DDF2FF; --c-class-ink:#17669A;
+  --c-play:#7BD88F;  --c-play-soft:#DFF6E4;  --c-play-ink:#237A3B;
+  --c-friend:#FFC94D;--c-friend-soft:#FFF0C7;--c-friend-ink:#8F5A00;
+  --c-mean:#B79CFF;  --c-mean-soft:#ECE4FF;  --c-mean-ink:#5B3FBF;
+  --c-help:#FF8FA3;  --c-help-soft:#FFE1E7;  --c-help-ink:#B0304B;
+  --accent:var(--c-class); --accent-soft:var(--c-class-soft); --accent-ink:var(--c-class-ink);
+  --font-display:'Baloo 2','Jua','Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-body:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-ko:'Jua','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A1938; --dot:#252350; --surface:#2A2856; --ink:#F4F2FF; --muted:#B7B4DC; --line:#43407E;
+    --outline:#0B0A20; --focus:#C9B8FF;
+    --c-class-soft:#22486B; --c-class-ink:#8FD3FF;
+    --c-play-soft:#1F4A33;  --c-play-ink:#93E6A6;
+    --c-friend-soft:#5A4514;--c-friend-ink:#FFD980;
+    --c-mean-soft:#3D3170;  --c-mean-ink:#CDBEFF;
+    --c-help-soft:#5E2B39;  --c-help-ink:#FFAFBE;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A1938; --dot:#252350; --surface:#2A2856; --ink:#F4F2FF; --muted:#B7B4DC; --line:#43407E;
+  --outline:#0B0A20; --focus:#C9B8FF;
+  --c-class-soft:#22486B; --c-class-ink:#8FD3FF;
+  --c-play-soft:#1F4A33;  --c-play-ink:#93E6A6;
+  --c-friend-soft:#5A4514;--c-friend-ink:#FFD980;
+  --c-mean-soft:#3D3170;  --c-mean-ink:#CDBEFF;
+  --c-help-soft:#5E2B39;  --c-help-ink:#FFAFBE;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);background-image:radial-gradient(var(--dot) 2.5px,transparent 2.5px);background-size:26px 26px;color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:20px 56px}
+.wrap{max-width:640px;margin-inline:auto;display:flex;flex-direction:column;gap:18px}
+.ko{font-family:var(--font-ko);font-weight:400}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+
+header{display:flex;align-items:center;gap:14px}
+.mascot{width:74px;height:74px;flex:none}
+header h1{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,9vw,2.7rem);line-height:1;letter-spacing:-.01em}
+header h1 span{display:inline-block}
+header h1 .w1{color:var(--c-class-ink)} header h1 .w2{color:var(--c-mean-ink);transform:rotate(-3deg)} header h1 .w3{color:var(--c-help-ink)}
+
+.progress{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:800;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.bar{flex:1;height:22px;border-radius:99px;background:var(--surface);border:3px solid var(--outline);overflow:hidden}
+.bar>i{display:block;height:100%;width:0;background:repeating-linear-gradient(-45deg,var(--sun) 0 10px,#FFE27A 10px 20px);border-radius:99px;transition:width .35s}
+.star{width:30px;height:30px;flex:none}
+
+.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.tab{--t:var(--c-class);--ts:var(--c-class-soft);font:inherit;font-family:var(--font-display);font-weight:700;font-size:.64rem;line-height:1.15;overflow-wrap:break-word;word-break:keep-all;color:var(--ink);background:var(--ts);border:3px solid var(--outline);border-radius:16px;padding:6px 1px 5px;box-shadow:0 4px 0 var(--outline);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;transition:transform .1s,box-shadow .1s}
+.tab[data-c="class"]{--t:var(--c-class);--ts:var(--c-class-soft)}
+.tab[data-c="games"]{--t:var(--c-play);--ts:var(--c-play-soft)}
+.tab[data-c="friends"]{--t:var(--c-friend);--ts:var(--c-friend-soft)}
+.tab[data-c="mean"]{--t:var(--c-mean);--ts:var(--c-mean-soft)}
+.tab[data-c="help"]{--t:var(--c-help);--ts:var(--c-help-soft)}
+.tab small{font-family:var(--font-ko);font-weight:400;font-size:.58rem;word-break:keep-all;text-align:center;color:var(--muted)}
+.tab span.n{font-size:.66rem;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.tab[aria-selected="true"]{background:var(--t);color:var(--on-fill);transform:translateY(4px);box-shadow:0 0 0 var(--outline)}
+.tab[aria-selected="true"] small,.tab[aria-selected="true"] span.n{color:var(--on-fill)}
+
+.modes{display:flex;gap:8px;align-items:center}
+.mode{font:inherit;font-family:var(--font-display);font-weight:700;font-size:1rem;background:var(--surface);color:var(--ink);border:3px solid var(--outline);border-radius:99px;padding:4px 16px;box-shadow:0 3px 0 var(--outline);cursor:pointer}
+.mode[aria-pressed="true"]{background:var(--sun);color:#2B2A4C;transform:translateY(3px);box-shadow:none}
+.spacer{flex:1}
+.link{white-space:nowrap;font:inherit;font-size:.85rem;font-weight:700;background:none;border:none;color:var(--muted);text-decoration:underline;cursor:pointer;padding:6px 4px}
+
+.groups{display:flex;flex-wrap:wrap;gap:8px}
+.gchip{font:inherit;font-family:var(--font-display);font-size:.95rem;font-weight:700;border-radius:99px;border:3px solid var(--outline);background:var(--surface);color:var(--ink);padding:2px 14px;min-height:38px;box-shadow:0 3px 0 var(--outline);cursor:pointer}
+.gchip[aria-pressed="true"]{background:var(--accent);color:var(--on-fill);transform:translateY(3px);box-shadow:none}
+
+.card{touch-action:pan-y;user-select:none;-webkit-user-select:none;perspective:1200px;background:none;border:0;padding:0 0 8px;width:100%;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.card-inner{display:grid;transition:transform .5s;transform-style:preserve-3d}
+.card[data-flipped="true"] .card-inner{transform:rotateY(180deg)}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:30px;padding:22px 22px 20px;min-height:14rem;display:flex;flex-direction:column;gap:12px;border:3px solid var(--outline);box-shadow:0 8px 0 var(--outline)}
+.front{background:var(--accent-soft)}
+.back{background:var(--surface);transform:rotateY(180deg)}
+.tag{align-self:flex-start;font-family:var(--font-display);font-size:.8rem;font-weight:800;letter-spacing:.03em;background:var(--accent);color:var(--on-fill);border:2.5px solid var(--outline);border-radius:99px;padding:1px 12px}
+.sit{font-family:var(--font-display);font-size:1.45rem;font-weight:700;line-height:1.25;text-wrap:balance;margin:auto 0 0}
+.sit-ko{font-size:1.1rem;color:var(--muted);margin:0;line-height:1.4}
+.hint{margin-top:auto;font-size:.85rem;font-weight:700;color:var(--muted)}
+.say{font-family:var(--font-display);font-size:1.5rem;font-weight:700;line-height:1.25;margin:0;text-wrap:balance}
+.say-ko{font-size:1.2rem;margin:0;color:var(--accent-ink);line-height:1.4}
+.note2{margin:0;font-size:.95rem;color:var(--muted)}
+.sayrow{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+
+.chip{font:inherit;font-family:var(--font-display);font-weight:700;border-radius:99px;border:3px solid var(--outline);background:var(--surface);color:var(--ink);padding:6px 16px;min-height:46px;cursor:pointer;display:inline-flex;gap:8px;align-items:center;box-shadow:0 4px 0 var(--outline)}
+.chip svg{width:20px;height:20px;fill:var(--outline)}
+.chip:active{transform:translateY(3px);box-shadow:0 1px 0 var(--outline)}
+.chip.playing{background:var(--sun);color:#2B2A4C}
+.sp2{flex:none;width:50px;height:50px;padding:0;justify-content:center;background:var(--accent)}
+.sp2 svg{fill:var(--on-fill)}
+.chip.sp2.playing{background:var(--sun)}
+
+.nav{display:flex;align-items:center;gap:10px;margin-top:10px}
+.nav .count{flex:1;white-space:nowrap;font-size:.95rem;text-align:center;font-family:var(--font-display);font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.btn{font:inherit;font-family:var(--font-display);font-weight:800;font-size:1.05rem;border-radius:18px;padding:8px 18px;border:3px solid var(--outline);background:var(--surface);color:var(--ink);cursor:pointer;min-height:50px;box-shadow:0 5px 0 var(--outline)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--outline)}
+.btn.next{background:var(--accent);color:var(--on-fill)}
+
+.listen{display:flex;margin-top:16px}
+.chip#altToggle{font-size:1.25rem;padding:8px 22px;min-height:56px;background:var(--sun);color:#2B2A4C;width:100%;justify-content:center}
+.car{display:inline-block;transition:transform .2s}
+.chip[aria-expanded="true"] .car{transform:rotate(180deg)}
+.altpanel{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:14px;padding:18px;background:var(--accent-soft);border:3px dashed var(--outline);border-radius:26px}
+.altpanel[hidden]{display:none}
+.alt-en{margin:0;font-family:var(--font-display);font-weight:700;font-size:1.55rem;line-height:1.25}
+.alt-ko{margin:4px 0 0;color:var(--accent-ink);font-size:1.2rem}
+#hearAlt{flex:none;width:50px;height:50px;padding:0;justify-content:center;background:var(--accent)}
+#hearAlt svg{fill:var(--on-fill)}
+#hearAlt.playing{background:var(--sun)}
+
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.list li{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;background:var(--surface);border:3px solid var(--outline);border-radius:22px;padding:4px 10px 10px 4px;box-shadow:0 4px 0 var(--outline)}
+.list label{flex:1 1 60%;display:flex;gap:12px;padding:10px 4px 2px 8px;cursor:pointer;align-items:flex-start}
+.list input{appearance:none;-webkit-appearance:none;width:30px;height:30px;margin:2px 0 0;flex:none;border:3px solid var(--outline);border-radius:10px;background:var(--surface);cursor:pointer}
+.list input:checked{background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232B2A4C' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center/80% no-repeat}
+.list .t{display:flex;flex-direction:column;gap:3px}
+.list .s{color:var(--muted);font-size:.9rem}
+.list .p{font-family:var(--font-display);font-weight:700;font-size:1.15rem;line-height:1.3}
+.list .k{font-family:var(--font-ko);font-size:1rem;color:var(--accent-ink)}
+.list input:checked ~ .t .p{text-decoration:line-through;text-decoration-color:var(--sun);text-decoration-thickness:3px}
+.list .sp{margin-top:8px;padding:4px 12px;min-height:44px;min-width:44px;justify-content:center;flex:none;background:var(--accent)}
+.list .sp svg{fill:var(--on-fill)}
+.list .sp{color:var(--on-fill)}
+
+.tips{background:var(--surface);border:3px solid var(--outline);border-radius:26px;padding:16px 20px 18px;box-shadow:0 6px 0 var(--outline)}
+.tips h2{margin:0 0 8px;font-family:var(--font-display);font-size:1.25rem}
+.tips ul{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:8px;color:var(--muted);font-size:.95rem}
+.tips b{color:var(--ink)}
+@media (prefers-reduced-motion: reduce){.card-inner,.bar>i,.tab,.car{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <svg class="mascot" viewBox="0 0 80 80" aria-hidden="true">
+      <path d="M14 20c0-7 5-12 12-12h30c7 0 12 5 12 12v22c0 7-5 12-12 12H38l-14 13v-13h-2c-6 0-8-5-8-12z" fill="var(--c-friend)" stroke="var(--outline)" stroke-width="3.5" stroke-linejoin="round"/>
+      <circle cx="30" cy="30" r="3.6" fill="var(--outline)"/><circle cx="52" cy="30" r="3.6" fill="var(--outline)"/>
+      <path d="M31 40c4 6 16 6 20 0" fill="none" stroke="var(--outline)" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="23" cy="38" r="4" fill="var(--c-help)" opacity=".8"/><circle cx="59" cy="38" r="4" fill="var(--c-help)" opacity=".8"/>
+      <path d="M68 6l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="var(--c-class)" stroke="var(--outline)" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+    <h1><span class="w1">Speak-</span><span class="w2">Up</span> <span class="w3">Cards</span></h1>
+  </header>
+
+  <div class="progress"><span id="pcount">0 / 15</span><div class="bar"><i id="pbar"></i></div><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z" fill="var(--sun)" stroke="var(--outline)" stroke-width="2" stroke-linejoin="round"/></svg></div>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+
+  <div class="modes">
+    <button class="mode" data-mode="cards" aria-pressed="true">Flashcards</button>
+    <button class="mode" data-mode="list" aria-pressed="false">Checklist</button>
+    <span class="spacer"></span>
+    <button class="link" id="reset">Reset progress</button>
+  </div>
+
+  <div class="groups" id="groups" hidden></div>
+
+  <section id="cardsView">
+    <div class="card" id="card" role="button" tabindex="0" aria-live="polite"></div>
+    <div class="nav">
+      <button class="btn" id="prev" aria-label="Previous card">&larr; Back</button>
+      <div class="count" id="count"></div>
+      <button class="btn next" id="next" aria-label="Next card">Next &rarr;</button>
+    </div>
+    <div class="listen" role="group" aria-label="Listen and other ways">
+      <button class="chip" id="altToggle" aria-expanded="false" aria-controls="altPanel"><span class="ko">다른 표현</span> · Other ways <span class="car" aria-hidden="true">▾</span></button>
+    </div>
+    <div class="altpanel" id="altPanel" hidden>
+      <div class="altbody"><p class="alt-en" id="altEn"></p><p class="alt-ko ko" id="altKoText"></p></div>
+      <button class="chip" id="hearAlt" aria-label="Listen to the other expression"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button>
+    </div>
+  </section>
+
+  <section id="listView" hidden>
+    <ul class="list" id="list"></ul>
+  </section>
+
+  <aside class="tips">
+    <h2>How to practise <span class="ko">(연습 방법)</span></h2>
+    <ul>
+      <li><b>Read the situation, then say the phrase out loud</b> before you tap the card to flip it. Tap the speaker to hear it.</li>
+      <li><b>Calm voice, eyes up, hands down.</b> Say it once, then walk away or go back to what she was doing.</li>
+      <li><b>When kids leave her out, practise a relaxed shrug</b> and a calm “Okay, whatever!” face. Staying calm keeps the power with her.</li>
+      <li><b>Tick the Checklist</b> when she says a phrase in a real moment or in role-play at home. Celebrate trying, not perfect English.</li>
+    </ul>
+  </aside>
+</div>
+
+<script>
+const TABS=[
+ {id:"class",en:"Class",ko:"수업 참여·발표",color:"class",cards:[
+  {sit:"When sharing an idea or answering a question in class",sitKo:"손들고 발표하거나 내 생각을 말할 때",say:"I’d like to share my idea.",ko:"제 생각을 공유하고 싶어요.",alt:"I think... because...",altKo:"제 생각에는... 왜냐하면..."},
+  {sit:"When agreeing with a classmate or adding more",sitKo:"친구 의견에 동의하거나 덧붙일 때",say:"I agree with [Name], and I also think...",ko:"[이름]의 말에 동의하고, 제 생각도...",alt:"That’s a great point! I think so too.",altKo:"좋은 생각이야! 나도 그렇게 생각해."},
+  {sit:"When you have a different opinion during a discussion",sitKo:"다른 의견을 예의 바르게 말할 때",say:"I see it a bit differently.",ko:"난 조금 다르게 생각해.",alt:"That’s interesting, but what about this way?",altKo:"그것도 재밌지만, 이런 방식은 어때?"},
+  {sit:"When asking a question or missing what was said",sitKo:"질문이 있거나 선생님 말을 못 들었을 때",say:"Could you repeat that, please?",ko:"다시 한번 말씀해 주시겠어요?",alt:"I have a question about this part.",altKo:"이 부분에 대해 질문이 있어요."},
+  {sit:"When called on and needing a second to think",sitKo:"발표 전 생각할 시간이 필요할 때 (얼어붙지 않기)",say:"Give me a second to think, please.",ko:"생각할 시간 잠깐만 주세요.",alt:"Let me think for a moment.",altKo:"잠시만 생각해 볼게요."},
+  {sit:"When dividing roles during group work",sitKo:"모둠 활동에서 역할을 나눌 때",say:"What role would you like to take?",ko:"넌 무슨 역할을 맡고 싶어?",alt:"Can I do the drawing/writing part?",altKo:"내가 그리기/쓰기 부분을 맡아도 될까?"},
+  {sit:"When asking to share supplies during an activity",sitKo:"준비물이나 재료를 함께 쓰고 싶을 때",say:"Do you want to share these supplies?",ko:"이 준비물 같이 쓸래?",alt:"Can I use this marker after you?",altKo:"너 다 쓰고 나면 내가 이 마커 써도 될까?"},
+  {sit:"When she doesn’t understand the instructions",sitKo:"선생님 설명이나 친구 말을 잘 이해 못 했을 때",say:"I’m not sure what to do next.",ko:"다음으로 뭘 해야 할지 잘 모르겠어.",alt:"Can you show me how to start?",altKo:"어떻게 시작하는지 보여줄 수 있어?"},
+  {sit:"When offering or asking for help with work",sitKo:"작업에 도움이 필요하거나 도와주고 싶을 때",say:"Do you need a hand with that?",ko:"그거 내가 좀 도와줄까?",alt:"Can you help me with this step?",altKo:"이 단계 좀 도와줄 수 있어?"},
+  {sit:"When she makes a mistake while reading aloud",sitKo:"소리 내어 읽다가 실수했을 때",say:"Let me try that word one more time.",ko:"그 단어 다시 한번 읽어볼게요.",alt:"Oops, my bad! Let me correct that.",altKo:"앗, 내 실수야! 바로잡을게."},
+  {sit:"When she wants to show her work",sitKo:"내 과제·작품을 발표하거나 나누고 싶을 때",say:"Look what I made! What do you think?",ko:"내가 만든 것 좀 봐! 어때 보여?",alt:"I finished my part. Want to see?",altKo:"나 내 부분 다 끝냈어. 볼래?"},
+  {sit:"When she finishes early and doesn’t know what to do",sitKo:"일찍 끝내고 뭘 할지 모를 때",say:"I’m done. What can I do next?",ko:"다 끝났어요. 다음에 뭘 하면 될까요?",alt:"Can I help someone else?",altKo:"다른 친구를 도와줘도 될까요?"},
+  {sit:"When she needs the restroom or a drink of water",sitKo:"화장실이나 물 마시러 가고 싶을 때",say:"May I go to the restroom, please?",ko:"화장실 다녀와도 될까요?",alt:"May I get some water, please?",altKo:"물 마시고 와도 될까요?"},
+  {sit:"When she doesn’t know a word in English",sitKo:"영어로 뭐라고 하는지 모를 때",say:"How do you say this in English?",ko:"이건 영어로 뭐라고 해요?",alt:"I know it in Korean. Can I try to explain?",altKo:"한국어로는 아는데, 설명해 봐도 될까요?"},
+  {sit:"When someone talks over her",sitKo:"내 말을 끊고 끼어들 때",say:"I wasn’t finished yet. Let me finish.",ko:"나 아직 말 안 끝났어. 끝까지 들어 줘.",alt:"Wait, I’m still talking.",altKo:"잠깐, 나 아직 말하는 중이야."}]},
+
+ {id:"games",en:"Games",ko:"게임·규칙·팀",color:"play",cards:[
+  {sit:"When explaining game rules to friends",sitKo:"내가 게임 규칙을 친구들에게 설명할 때",say:"Here is how we play: first...",ko:"게임 규칙은 이렇게 하는 거야: 먼저...",alt:"The main rule is simple: if you...",altKo:"주요 규칙은 간단해: 만약 네가..."},
+  {sit:"When someone breaks a rule or kids fight over rules",sitKo:"누군가 규칙을 어기거나 다툴 때",say:"Let’s stick to the rules so it’s fair.",ko:"공평하게 규칙을 지키면서 하자.",alt:"How about we take turns making the rules?",altKo:"규칙은 번갈아 가면서 정하는 건 어때?"},
+  {sit:"When deciding who goes first",sitKo:"역할이나 순서를 정할 때",say:"Let’s rock, paper, scissors for it!",ko:"가위바위보로 정하자!",alt:"How about we flip a coin?",altKo:"동전 던지기로 정할까?"},
+  {sit:"When a friend says “You’re doing it wrong!”",sitKo:"“그렇게 하면 틀렸어!”라고 할 때",say:"There are different ways to do it. This is my way.",ko:"다른 방법도 있어. 이건 내 방식이야.",alt:"We can try both ways and see!",altKo:"두 가지 방식 다 해보고 결정하자!"},
+  {sit:"When picking teams for a game",sitKo:"팀을 나눌 때",say:"How should we split the teams?",ko:"우리 팀 어떻게 나눌까?",alt:"Let’s do captain’s choice or random pairs!",altKo:"주장이 뽑거나 랜덤으로 짝을 정하자!"},
+  {sit:"When she is picked last or wants to join a team",sitKo:"체육 시간에 마지막에 뽑히거나 팀에 끼고 싶을 때",say:"Which team needs one more player?",ko:"어느 팀에 한 명 더 필요해?",alt:"I can play any position you need!",altKo:"필요한 자리 어디든 내가 뛸게!"},
+  {sit:"When someone gloats or gets upset over losing",sitKo:"이기고 놀리거나 져서 불평하는 친구에게",say:"It’s just a game, no big deal!",ko:"그냥 게임일 뿐이야, 별일 아니야!",alt:"Winning isn’t everything, we had fun!",altKo:"이기는 게 전부는 아니지, 재미있었잖아!"},
+  {sit:"When keeping score",sitKo:"점수를 계산하거나 기록할 때",say:"Who’s keeping score?",ko:"점수는 누가 계산해?",alt:"That’s one point for your team!",altKo:"너희 팀 1점 획득이다!"},
+  {sit:"When she makes a mistake or loses a turn",sitKo:"아깝게 지거나 실수했을 때",say:"Ah, so close! My bad.",ko:"아, 진짜 아까웠다! 내 실수야.",alt:"Nice attempt! I’ll do better next time.",altKo:"좋은 시도였어! 다음엔 내가 더 잘해볼게."},
+  {sit:"When helping a friend who doesn’t know the game",sitKo:"규칙을 잘 모르는 친구에게 안내할 때",say:"It’s easy, let me show you.",ko:"쉬워, 내가 보여줄게.",alt:"Don’t worry, you’ll get used to it quickly!",altKo:"걱정 마, 금방 익숙해질 거야!"},
+  {sit:"When finishing a game",sitKo:"게임 결과에 승복하고 깔끔하게 마무리할 때",say:"Good game, everyone! That was fun.",ko:"모두 수고했어! 진짜 재미있었다.",alt:"Nice try! Let’s play again next time.",altKo:"잘했어! 다음에 또 같이 하자."},
+  {sit:"When she needs a time-out during play",sitKo:"놀이 중 잠깐 멈추고 싶을 때",say:"Time out, please! I need to tie my shoes.",ko:"잠깐만 타임! 신발끈 좀 묶을게.",alt:"Hold on a second, let me catch my breath.",altKo:"잠깐만 기다려줘, 숨 좀 돌리고."},
+  {sit:"When she wants to switch to a different game",sitKo:"다른 게임을 하고 싶을 때",say:"Can we try a different game next?",ko:"다음엔 다른 게임 해 볼까?",alt:"Let’s vote on what to play.",altKo:"뭐 할지 투표하자."},
+  {sit:"When she wants a turn",sitKo:"내 차례를 달라고 할 때",say:"Can I have a turn, please?",ko:"나도 해 봐도 돼?",alt:"Is it my turn yet?",altKo:"이제 내 차례야?"},
+  {sit:"When she thinks someone got a rule wrong",sitKo:"규칙이 틀렸다고 생각될 때",say:"Wait, I think that’s not the rule. Let’s check.",ko:"잠깐, 그건 규칙이 아닌 것 같아. 확인해 보자.",alt:"Can we ask the teacher what the rule is?",altKo:"선생님께 규칙이 뭔지 물어볼까?"},
+  {sit:"When someone is left out of the game",sitKo:"한 친구가 게임에서 빠져 있을 때",say:"Let’s let [Name] play too.",ko:"[이름]도 같이 하자.",alt:"There’s enough room for everyone.",altKo:"모두가 같이 할 자리는 충분해."},
+  {group:"Freeze Tag",step:"Freeze Tag · Overview",sit:"When telling friends which game you’re playing",sitKo:"게임의 이름을 소개할 때",say:"We are playing Freeze Tag.",ko:"우리 얼음땡 하는 중이야.",alt:"This game is called Freeze Tag.",altKo:"이 게임 이름은 얼음땡이야."},
+  {group:"Freeze Tag",step:"Freeze Tag · Roles",sit:"When choosing who is “It” (the tagger)",sitKo:"술래를 정할 때",say:"I am “It” for this game.",ko:"이번 게임은 내가 술래야.",alt:"Who wants to be “It” first?",altKo:"누가 먼저 술래 할래?",note:"북미에서는 술래를 “It”이라고 불러요."},
+  {group:"Freeze Tag",step:"Freeze Tag · Goal",sit:"When explaining the goal of the game",sitKo:"게임의 목표를 설명할 때",say:"The main goal is to tag everyone / run away from “It”.",ko:"주요 목표는 모두를 잡는 거야 / 술래를 피해 달아나는 거야.",alt:"Your goal is to avoid getting tagged.",altKo:"목표는 잡히지 않는 거야."},
+  {group:"Freeze Tag",step:"Step 1 · First",sit:"Explaining the rules in order: how the game starts",sitKo:"규칙 설명 ① 게임이 어떻게 시작하는지",say:"First, one person counts to ten while everyone hides/runs.",ko:"먼저, 한 사람이 10을 세는 동안 모두 숨거나/달려가.",alt:"First, “It” closes their eyes and counts to ten.",altKo:"먼저, 술래가 눈을 감고 10을 세어."},
+  {group:"Freeze Tag",step:"Step 2 · Next",sit:"Explaining the rules in order: what “It” does",sitKo:"규칙 설명 ② 술래가 하는 일",say:"Next, “It” tries to chase and tag you.",ko:"다음으로, 술래가 쫓아와서 너를 터치할 거야.",alt:"Then, “It” comes to catch everyone.",altKo:"그러고 나서 술래가 모두를 잡으러 와."},
+  {group:"Freeze Tag",step:"Step 3 · If…",sit:"Explaining the rules in order: what happens when you are tagged",sitKo:"규칙 설명 ③ 잡히면 어떻게 되는지",say:"If “It” touches you, you have to freeze!",ko:"술래가 너를 터치하면, 넌 얼어붙어야 해!",alt:"When you get tagged, you must stand still.",altKo:"잡히면 움직이지 말고 가만히 서 있어야 해."},
+  {group:"Freeze Tag",step:"Step 4 · Unfreeze",sit:"Explaining the rules in order: how to get unfrozen",sitKo:"규칙 설명 ④ 얼음이 풀리는 방법",say:"To get unfrozen, another player has to touch your hand/shoulder.",ko:"얼음이 풀리려면, 다른 친구가 네 손/어깨를 터치해 줘야 해.",alt:"A teammate can unfreeze you by tagging you.",altKo:"팀원이 너를 터치해서 땡 해 줄 수 있어."},
+  {group:"Freeze Tag",step:"Zones · Base",sit:"When explaining where the safe area is",sitKo:"안전 구역을 정할 때",say:"This area is the Safe Zone / Base.",ko:"이 영역은 안전지대(기지)야.",alt:"You can’t get tagged if you are inside the base.",altKo:"기지 안에 있으면 잡히지 않아."},
+  {group:"Freeze Tag",step:"Zones · Limit",sit:"When someone stays in the safe zone too long",sitKo:"안전지대에 계속 머무는 친구가 있을 때",say:"No camping near the safe zone!",ko:"안전지대 근처에 계속 진치고 있으면 안 돼!",alt:"You can only stay in the base for 10 seconds.",altKo:"기지에는 10초 동안만 있을 수 있어.",note:"camping은 한 자리에 계속 머무르는 걸 뜻해요."},
+  {group:"Freeze Tag",step:"Safety",sit:"When reminding friends to tag gently",sitKo:"살살 터치하자고 말할 때",say:"Gentle tags only, no pushing!",ko:"살살 터치해야 해, 밀면 안 돼!",alt:"Just a light touch, okay?",altKo:"살짝 가볍게 터치하는 거야, 알겠지?"},
+  {group:"Freeze Tag",step:"In the game · Tagged",sit:"When you tag someone during the game",sitKo:"게임 중 친구를 터치했을 때",say:"You got tagged! You’re “It” now!",ko:"너 잡혔어! 이제 네가 술래야!",alt:"I tagged you! Now it’s your turn to be “It”.",altKo:"내가 너 터치했어! 이제 네가 술래 할 차례야."},
+  {group:"Freeze Tag",step:"In the game · Unfreeze",sit:"When you are frozen and need help",sitKo:"얼음 상태에서 풀어 달라고 할 때",say:"Unfreeze me, please!",ko:"나 땡 해줘(풀어줘)!",alt:"Help me! I’m frozen!",altKo:"나 좀 도와줘! 나 얼어붙었어!"},
+  {group:"Freeze Tag",step:"In the game · Safe",sit:"When you reach the safe zone",sitKo:"기지에 도착했을 때",say:"I made it to the base!",ko:"나 기지에 도착했다!",alt:"Safe! I’m in the safe zone!",altKo:"세이프! 나 안전지대 안에 있어!"},
+  {group:"Freeze Tag",step:"In the game · Dispute",sit:"When someone says you were tagged but they missed",sitKo:"터치 안 됐는데 잡혔다고 할 때",say:"That doesn’t count, you missed me!",ko:"그건 인정 안 돼, 나 안 닿았잖아!",alt:"You didn’t touch me, you caught my shirt!",altKo:"너 나 터치 못 했어, 옷깃만 살짝 건드렸잖아!"},
+  {group:"Freeze Tag",step:"Ending",sit:"When the round is over",sitKo:"한 판이 끝났을 때",say:"Game over! Everyone got tagged.",ko:"게임 끝! 모두 잡혔어.",alt:"“It” wins this round!",altKo:"이번 라운드는 술래가 이겼다!"},
+  {group:"Freeze Tag",step:"Ending · Reset",sit:"When starting another round",sitKo:"다시 시작하고 정리할 때",say:"Let’s reset and play one more round!",ko:"다시 리셋하고 한 판 더 하자!",alt:"Who wants to be “It” for the next game?",altKo:"다음 게임에는 누가 술래 할래?"}]},
+
+ {id:"friends",en:"Friends & Small talk",ko:"점심·놀이터·스몰톡",color:"friend",cards:[
+  {sit:"When approaching a friend who is playing alone",sitKo:"모르는 친구나 혼자 있는 친구에게 다가갈 때",say:"Hi! Do you want to play together?",ko:"안녕! 우리 같이 놀래?",alt:"Hey, do you want to try the swings with me?",altKo:"나랑 같이 그네 탈래?"},
+  {sit:"When she wants to join a game already going",sitKo:"이미 놀고 있는 그룹에 끼고 싶을 때",say:"Hey! What are you playing? Can I join?",ko:"안녕! 무슨 게임 하고 있어? 나도 같이 해도 돼?",alt:"Looks fun! Is there room for one more?",altKo:"재미있어 보인다! 한 명 더 같이 해도 돼?"},
+  {sit:"When looking for a seat at the lunch table",sitKo:"점심시간에 자리를 찾거나 함께 앉고 싶을 때",say:"Is this seat taken? Can I join you?",ko:"여기 자리 임자 있어? 같이 앉아도 돼?",alt:"Mind if I sit here today?",altKo:"오늘 여기 앉아도 괜찮아?"},
+  {sit:"When someone says “You can’t play” or “This seat is saved”",sitKo:"“안 돼 / 자리 없어 / 친구 자리야”라고 거절당했을 때",say:"No problem! I’ll find another spot.",ko:"괜찮아! 다른 곳에 가지 뭐.",alt:"All good! Let me know if a spot opens up later.",altKo:"알겠어! 나중에 자리 남으면 알려줘."},
+  {sit:"When asking a classmate to go to recess together",sitKo:"쉬는 시간에 같이 나가자고 할 때",say:"Do you want to head outside together?",ko:"우리 같이 밖으로 나갈래?",alt:"Let’s walk to the playground together!",altKo:"같이 놀이터로 걸어가자!"},
+  {sit:"When starting a conversation with a compliment",sitKo:"상대방 칭찬으로 대화를 시작할 때",say:"That looks cool! How did you make it?",ko:"진짜 멋지다! 어떻게 만든 거야?",alt:"I love your shoes! Red is my favorite color.",altKo:"너 신발 진짜 예쁘다! 빨간색 내가 제일 좋아하는 색인데."},
+  {sit:"When starting a conversation at lunch or snack time",sitKo:"점심 도시락·간식에 대해 말을 걸 때",say:"What did you pack for lunch today?",ko:"너 오늘 점심 도시락 뭐 싸 왔어?",alt:"That looks delicious! What is it?",altKo:"그거 진짜 맛있어 보인다! 뭐야?"},
+  {sit:"When looking for a partner for a class activity",sitKo:"짝꿍 정하는 시간에 다가갈 때",say:"Do you want to be partners?",ko:"나랑 짝꿍 할래?",alt:"Hey, do you have a partner yet?",altKo:"너 혹시 아직 짝꿍 없어?"},
+  {sit:"When asking a friend to go to the water fountain or bathroom together",sitKo:"물 마시러 가거나 화장실 갈 때 같이 가자고 할 때",say:"Do you want to come with me to grab some water?",ko:"나랑 같이 물 마시러 갈래?",alt:"Let’s ask for a hall pass together!",altKo:"우리 복도 통행증(Hall pass) 같이 받아서 가자!"},
+  {sit:"When asking about favorite games or hobbies",sitKo:"공통 관심사(게임, 캐릭터, 스포츠)를 물어볼 때",say:"Do you like playing Roblox / drawing?",ko:"너 로블록스 / 그림 그리기 좋아해?",alt:"Who is your favorite character?",altKo:"네가 제일 좋아하는 캐릭터가 뭐야?"},
+  {sit:"When saying goodbye at the end of recess",sitKo:"쉬는 시간이 끝나고 헤어질 때",say:"That was fun! See you in class.",ko:"오늘 재미있었어! 교실에서 보자.",alt:"Catch you later on the playground!",altKo:"나중에 놀이터에서 또 보자!"},
+  {sit:"When meeting someone new",sitKo:"처음 만난 친구에게 자기소개할 때",say:"Hi, I’m ___. What’s your name?",ko:"안녕, 나는 ___야. 넌 이름이 뭐야?",alt:"Nice to meet you!",altKo:"만나서 반가워!"},
+  {sit:"When thanking a friend",sitKo:"친구에게 고마움을 표현할 때",say:"Thank you for playing with me!",ko:"나랑 놀아 줘서 고마워!",alt:"Thanks for sharing!",altKo:"같이 써 줘서 고마워!"},
+  {sit:"When she wants to keep the friendship going",sitKo:"내일 또 같이 놀고 싶을 때",say:"Do you want to play again tomorrow?",ko:"내일 또 같이 놀래?",alt:"Let’s play together again soon!",altKo:"우리 또 같이 놀자!"},
+  {sit:"When she bumps into someone or hurts a friend by accident",sitKo:"실수로 부딪히거나 친구를 다치게 했을 때",say:"I’m sorry. I didn’t mean to.",ko:"미안해. 일부러 그런 게 아니야.",alt:"Are you okay? I’ll be more careful.",altKo:"괜찮아? 앞으로 더 조심할게."},
+  {group:"Small talk",step:"Small talk · Your work",sit:"When showing her work and asking what the other kid is making",sitKo:"내 활동이나 그림을 보여주며 말 걸 때",say:"Look what I’m working on! What are you making?",ko:"나 이거 만드는 중인데 좀 봐봐! 넌 뭐 만들어?",alt:"I’m almost done with mine. How is yours going?",altKo:"나 이제 거의 다 했다. 너 건 어떻게 돼가?"},
+  {group:"Small talk",step:"Small talk · Plans",sit:"When asking about weekend or recess plans",sitKo:"쉬는 시간이나 주말 계획을 물어볼 때",say:"Any fun plans for the weekend?",ko:"이번 주말에 무슨 재미있는 계획 있어?",alt:"What are you going to do during recess today?",altKo:"오늘 쉬는 시간에 뭐 하고 놀 거야?"},
+  {group:"Small talk",step:"Small talk · Their stuff",sit:"When commenting on a classmate’s stationery or backpack",sitKo:"상대방의 학용품·소지품을 보고 관심을 보일 때",say:"That’s so cool! Where did you get that pencil case?",ko:"그거 진짜 멋지다! 그 필통 어디서 났어?",alt:"I love that sticker on your notebook!",altKo:"네 공책에 붙은 스티커 진짜 예쁘다!"},
+  {group:"Small talk",step:"Small talk · In class",sit:"When chatting with the classmate next to her between activities",sitKo:"수업 중 옆자리 친구에게 가볍게 말 걸 때",say:"This project seems fun! Do you like this topic?",ko:"이 프로젝트 재미있어 보인다! 넌 이 주제 좋아해?",alt:"Are you almost finished with this page?",altKo:"너 이 페이지 거의 다 썼어?"},
+  {group:"Small talk",step:"Small talk · Homework",sit:"When chatting about an assignment",sitKo:"선생님 과제나 지시사항에 대해 의견 나눌 때",say:"That assignment was tricky! How was it for you?",ko:"이번 과제 좀 어렵지 않았어? 넌 어땠어?",alt:"Did you finish the reading homework yet?",altKo:"너 읽기 숙제 벌써 다 끝냈어?"},
+  {group:"Small talk",step:"Small talk · Interests",sit:"When asking about favorite shows and videos",sitKo:"공통 흥미(유튜브, 영화, 캐릭터)를 물어볼 때",say:"Do you watch [YouTube channel/Movie]? I love it!",ko:"너 [유튜브 채널/영화] 봐? 나 그거 진짜 좋아하는데!",alt:"Do you play Roblox? What’s your favorite game in it?",altKo:"너 로블록스 해? 거기서 무슨 게임 제일 좋아해?"},
+  {group:"Small talk",step:"Small talk · Games",sit:"When asking about video games or favorite gaming activities",sitKo:"요즘 즐겨 하는 게임에 대해 물어볼 때",say:"What’s your favorite game to play right now?",ko:"요즘 네가 제일 좋아하는 게임이 뭐야?",alt:"Do you play any fun games on iPad or computer?",altKo:"아이패드나 컴퓨터로 재미있는 게임 하는 거 있어?"},
+  {group:"Small talk",step:"Small talk · Pets",sit:"When asking about pets or favorite animals",sitKo:"좋아하는 동물이나 반려동물 이야기할 때",say:"Do you have any pets at home?",ko:"너 집에 반려동물 키워?",alt:"What’s your absolute favorite animal?",altKo:"네가 세상에서 제일 좋아하는 동물이 뭐야?"},
+  {group:"Small talk",step:"Small talk · Sports",sit:"When talking about sports or after-school activities",sitKo:"스포츠나 운동 종목에 대해 이야기할 때",say:"Do you play any sports after school?",ko:"너 방과 후에 하는 운동 있어?",alt:"Are you into soccer / gymnastics / swimming?",altKo:"너 축구 / 체조 / 수영 좋아해?"},
+  {group:"Small talk",step:"Small talk · Music",sit:"When chatting about music, songs, or artists",sitKo:"좋아하는 음악, 노래, 가수 이야기할 때",say:"What kind of music do you like listening to?",ko:"너 어떤 음악 듣는 거 좋아해?",alt:"Have you heard that new song by [Artist/Movie]?",altKo:"[가수/영화]의 그 신곡 들어봤어?"},
+  {group:"Small talk",step:"Small talk · School subjects",sit:"When asking about a favorite subject in school",sitKo:"과목 호불호나 좋아하는 수업 이야기할 때",say:"What’s your favorite subject in class?",ko:"너 학교에서 무슨 과목을 제일 좋아해?",alt:"Do you like Art / PE / Science better?",altKo:"너 미술 / 체육 / 과학 중에 뭐가 더 좋아?"},
+  {group:"Small talk",step:"Small talk · Food",sit:"When talking about a favorite lunch or treat",sitKo:"점심시간에 맛있는 음식을 보고 말 걸 때",say:"That looks so good! Is it your favorite?",ko:"그거 진짜 맛있어 보인다! 네가 제일 좋아하는 거야?",alt:"Yum! Did you make that or buy it?",altKo:"와 맛있겠다! 그거 직접 만든 거야, 산 거야?"},
+  {group:"Small talk",step:"Small talk · After school",sit:"When asking about after-school clubs or routines",sitKo:"방과 후 학원이나 클럽 활동 이야기할 때",say:"Are you going to any after-school clubs today?",ko:"너 오늘 방과 후 클럽 활동 가?",alt:"What do you usually do right after school?",altKo:"너 보통 학교 끝나고 바로 뭐 해?"},
+  {group:"Small talk",step:"Small talk · Teacher",sit:"When making a casual comment about the teacher or a lesson",sitKo:"선생님이나 수업에 대해 가볍게 말할 때",say:"Our teacher is so funny today, right?",ko:"오늘 우리 선생님 진짜 웃기시지 않아?",alt:"That activity was actually super fun!",altKo:"방금 했던 그 활동 의외로 진짜 재밌었다!"},
+  {group:"Small talk",step:"Small talk · Friday",sit:"When talking about the weekend on Friday",sitKo:"금요일 오후 주말 기대감을 표할 때",say:"Yay, it’s Friday! Are you doing anything fun this weekend?",ko:"야호, 금요일이다! 이번 주말에 무슨 재미있는 일 해?",alt:"Finally the weekend! Any big plans?",altKo:"드디어 주말이다! 특별한 계획 있어?"},
+  {group:"Small talk",step:"Small talk · Monday",sit:"When asking about the past weekend on Monday morning",sitKo:"월요일 아침 주말에 뭐 했는지 물어볼 때",say:"How was your weekend? Did you do anything cool?",ko:"주말 잘 보냈어? 재미있는 일 있었어?",alt:"Did you go anywhere fun over the weekend?",altKo:"주말 동안 어디 재미있는 데 다녀왔어?"},
+  {group:"Small talk",step:"Small talk · Weather",sit:"When commenting on the weather during recess",sitKo:"날씨나 쉬는 시간 야외 활동 이야기할 때",say:"It’s so nice and sunny today, perfect for recess!",ko:"오늘 날씨 진짜 따뜻하고 맑다, 쉬는 시간에 놀기 딱 좋아!",alt:"It’s so cold/rainy today! I wish we had indoor recess.",altKo:"오늘 너무 춥다/비 온다! 실내 쉬는 시간이었으면 좋겠어."},
+  {group:"Small talk",step:"Small talk · Breaks",sit:"When asking about upcoming school breaks or holidays",sitKo:"방학이나 휴가 계획 물어볼 때",say:"Are you going on a trip for the break?",ko:"너 이번 방학 때 어디 여행 가?",alt:"What are you most excited for this summer/winter break?",altKo:"이번 여름/겨울 방학 때 뭐가 제일 기대돼?"},
+  {group:"Small talk",step:"Compliment · Clothes",sit:"When complimenting an outfit, hat, or accessory",sitKo:"옷 스타일이나 장신구를 칭찬할 때",say:"I love your sweater! The color looks so nice on you.",ko:"너 스웨터 진짜 예쁘다! 색깔이 너한테 잘 어울려.",alt:"Your backpack is super cool!",altKo:"너 가방 진짜 멋지다!"},
+  {group:"Small talk",step:"Compliment · Skills",sit:"When complimenting a skill (sports, art, reading)",sitKo:"친구의 운동·그림·발표 실력을 칭찬할 때",say:"You’re really good at drawing/running!",ko:"너 그림 진짜 잘 그린다 / 달리기 진짜 잘한다!",alt:"How did you get so fast at that?",altKo:"너 어떻게 그렇게 잘/빠르게 해?"},
+  {group:"Small talk",step:"Compliment · New things",sit:"When noticing something new a classmate has",sitKo:"새 신발, 새 필통 등 새 물건을 알아봐 줄 때",say:"Is that new? It looks really neat!",ko:"그거 새 거야? 진짜 깔끔하고 예쁘다!",alt:"Cool new water bottle! I like the stickers on it.",altKo:"새 물병 멋지다! 거기에 붙은 스티커 마음에 들어."}]},
+
+ {id:"mean",en:"Boundaries",ko:"단호하게 지키기",color:"mean",cards:[
+  {sit:"When someone says “Your drawing is so ugly!”",sitKo:"내 작업물이나 그림을 흉볼 때",say:"I like it, and that’s what matters to me.",ko:"난 내 그림이 마음에 들고, 나한테는 그게 중요해.",alt:"Everyone sees art differently, and I like mine.",altKo:"사람마다 보는 눈이 다르고, 난 내 그림이 좋아."},
+  {sit:"When someone cuts in line or snatches a toy",sitKo:"줄을 새치기하거나 물건을 빼앗으려 할 때",say:"I was next. Please wait your turn.",ko:"내가 다음 차례였어. 네 차례를 기다려 줘.",alt:"I’m still using this. You can have it when I’m done.",altKo:"나 아직 이거 쓰는 중이야. 다 쓰면 줄게."},
+  {sit:"When someone teases her English or accent",sitKo:"내 영어나 발음을 놀릴 때",say:"I’m learning two languages. What about you?",ko:"난 두 개 언어를 배우는 중이야. 너는?",alt:"I’m still learning, and that’s totally okay!",altKo:"나 아직 배우는 중이야, 그래도 괜찮아!"},
+  {sit:"When someone says something mean and adds “Just kidding!”",sitKo:"기분 나쁜 말을 하고 “장난인데 왜 그래?” 할 때",say:"That wasn’t funny to me.",ko:"나한테는 하나도 안 웃겨.",alt:"It’s still not nice, even if it’s a joke.",altKo:"장난이라도 그건 무례한 거야."},
+  {sit:"When someone calls her slow or says mean things",sitKo:"무례한 말을 하거나 자꾸 시비 걸 때",say:"So what? I’m doing my best.",ko:"그래서 뭐? 난 최선을 다하고 있어.",alt:"That’s just your opinion.",altKo:"그건 그냥 네 생각일 뿐이야."},
+  {sit:"When someone says “Nobody likes you!”",sitKo:"“아무도 너 안 좋아해!”라고 할 때",say:"That wasn’t very nice.",ko:"그건 별로 친절한 말이 아니야.",alt:"I don’t like the way you’re talking to me.",altKo:"네가 그렇게 말하는 거 싫어."},
+  {sit:"When a kid is being bossy (“You have to do this!”)",sitKo:"누군가 이래라저래라 명령할 때",say:"You’re not in charge of me.",ko:"네가 나한테 명령할 권한은 없어.",alt:"I can make my own decisions, thanks.",altKo:"내 결정은 내가 내려, 고맙지만 됐어."},
+  {sit:"When kids whisper and laugh while looking at her",sitKo:"날 보며 귓속말하고 비웃을 때 (수군거림)",say:"If you have something to say to me, say it directly.",ko:"나한테 할 말 있으면 내 앞에서 직접 해.",alt:"Whispering about someone right in front of them is rude.",altKo:"사람을 바로 앞에 두고 귓속말하는 건 무례한 행동이야."},
+  {sit:"When someone makes a rude comment about her food or belongings",sitKo:"내 소지품이나 음식을 지적할 때 (“Eww, what is that?”)",say:"It’s delicious! It’s a popular food back home.",ko:"이거 진짜 맛있어! 우리 나라에서 인기 있는 음식이야.",alt:"You don’t have to eat it, but I like it!",altKo:"네가 안 먹어도 돼, 하지만 난 좋아해!"},
+  {sit:"When peers pressure her to do something unsafe or mean",sitKo:"친구들이 하기 싫은 걸 억지로 시킬 때",say:"No thanks, I don’t feel comfortable doing that.",ko:"난 됐어, 그렇게 하는 건 마음이 안 편해.",alt:"I’m good. You guys go ahead without me.",altKo:"난 괜찮아. 너희끼리 먼저 해."},
+  {sit:"When someone keeps teasing her after she said no",sitKo:"싫다고 했는데 계속 놀릴 때 (첫 번째 경고)",say:"I don’t like that. Stop it, please.",ko:"나 그거 싫어. 그만해 줘.",alt:"Please stop. I said no.",altKo:"그만해 줘. 싫다고 했잖아."},
+  {sit:"When a mean kid won’t stop after being asked nicely",sitKo:"끝까지 단호하게 제지해야 할 때",say:"I told you to stop. I mean it.",ko:"그만하라고 말했어. 난 진심이야.",alt:"If you keep doing that, I’m telling the teacher.",altKo:"너 자꾸 그러면 선생님께 말씀드릴 거야."},
+  {sit:"When someone takes her seat",sitKo:"누군가 내 자리를 차지했을 때",say:"That’s my seat. Can you move, please?",ko:"거기 내 자리야. 비켜 줄래?",alt:"I was sitting here.",altKo:"내가 여기 앉아 있었어."},
+  {group:"Left out",step:"Left out · “She’s my friend”",sit:"When someone tells another child, “She’s my friend, don’t play with her!”",sitKo:"“얘 내 친구야, 쟤랑 놀지 마” 하며 편 가를 때",say:"Anyone can play with anyone here. You don’t own friends.",ko:"여기서 누구든 자유롭게 같이 놀 수 있어. 친구를 독점할 순 없어.",alt:"We can all play together, there’s no need to exclude people.",altKo:"다 같이 놀면 되지, 굳이 따돌릴 필요 없어."},
+  {group:"Left out",step:"Left out · Awkward silence",sit:"When kids stop talking or walk away as soon as she approaches",sitKo:"내가 다가가니까 갑자기 말을 멈추거나 딴 데로 갈 때",say:"That was awkward, but whatever!",ko:"방금 좀 어색했네, 뭐 어때!",alt:"No big deal, I’ll go hang out with someone else.",altKo:"별일 아니야, 난 다른 친구랑 놀면 돼."},
+  {group:"Left out",step:"Left out · Secret club",sit:"When someone says “This is a secret club, you’re not allowed.”",sitKo:"“비밀 모임이라 넌 안 돼”라며 대놓고 따돌릴 때",say:"That’s fine, I can start my own group!",ko:"그래 알겠어, 나도 내 모임 따로 만들지 뭐!",alt:"No problem, I’m not interested in secret clubs anyway.",altKo:"괜찮아, 어차피 비밀 모임 같은 거 관심 없어."},
+  {group:"Left out",step:"Left out · Blunt “No”",sit:"When she asks to join and someone bluntly says “No.”",sitKo:"같이 놀자고 했는데 차갑게 “싫어”라고만 할 때",say:"Okay, your loss!",ko:"알겠어, 너희 손해지 뭐!",alt:"All good, see you around!",altKo:"그래, 나중에 보자!"},
+  {group:"Left out",step:"Left out · Ignored",sit:"When kids plan things right in front of her while ignoring her",sitKo:"나만 쏙 빼놓고 자기들끼리 약속 잡거나 이야기할 때",say:"I’m right here, you know. But that’s okay.",ko:"나도 여기거든? 그래도 뭐 괜찮아.",alt:"I can hear you guys, but I’ll go do my own thing.",altKo:"너희 하는 말 다 들려, 그래도 난 내 거 할게."}]},
+
+ {id:"help",en:"Help",ko:"도움·자기표현",color:"help",cards:[
+  {sit:"When she feels overwhelmed or wants to leave a conversation",sitKo:"자리를 피하거나 대화를 끝내고 싶을 때",say:"I’m going to grab some water. See you later!",ko:"나 물 좀 마시고 올게. 나중에 보자!",alt:"I need to go back to my seat now. Talk to you later!",altKo:"나 이제 내 자리로 돌아가봐야 해. 나중에 또 얘기하자!"},
+  {sit:"When someone wrongly blames her (“You broke it!”)",sitKo:"억울하게 내 탓을 할 때",say:"That wasn’t me. Don’t blame me.",ko:"나 아니야. 내 탓으로 돌리지 마.",alt:"I didn’t do that, let’s ask the teacher.",altKo:"내가 한 거 아니야, 선생님께 여쭤보자."},
+  {sit:"When she can’t solve a problem herself and tells the teacher",sitKo:"스스로 해결이 안 되어 선생님께 알릴 때",say:"Excuse me, I tried asking them to stop, but they wouldn’t listen.",ko:"선생님, 제가 그만하라고 말해봤는데 듣지 않아요.",alt:"I need some help resolving a problem with a classmate.",altKo:"반 친구와의 문제를 해결하는 데 도움이 필요해요."},
+  {sit:"When she feels sick or needs the nurse’s office",sitKo:"몸이 아프거나 양호실에 가야 할 때",say:"I’m not feeling well. Can I go to the nurse’s office?",ko:"몸이 안 좋아요. 양호실에 가도 될까요?",alt:"My stomach/head hurts. Can I rest for a moment?",altKo:"배가/머리가 아파요. 잠시 쉬어도 될까요?"},
+  {sit:"When a friend fell or seems sad",sitKo:"다치거나 슬퍼 보이는 친구를 볼 때",say:"Are you okay? Do you need help?",ko:"너 괜찮아? 도움이 필요해?",alt:"Do you want me to get a teacher?",altKo:"내가 선생님 불러다 줄까?"},
+  {sit:"When someone touches her stuff or invades her space",sitKo:"원치 않는 장난이나 스킨십을 제지할 때",say:"Please don’t touch my stuff without asking.",ko:"물어보지 않고 내 물건 만지지 말아줘.",alt:"I need some personal space, please step back.",altKo:"개인 공간이 필요해, 뒤로 좀 물러서줘."},
+  {sit:"When she has lost something in class",sitKo:"내 물건을 잃어버렸을 때",say:"Has anyone seen my jacket/pencil case?",ko:"혹시 내 외투/필통 본 사람 있어?",alt:"I can’t find my book, can you help me check under the desk?",altKo:"내 책을 못 찾겠어, 책상 밑 좀 같이 봐줄래?"},
+  {sit:"When she freezes from noise or pressure and needs a break",sitKo:"갑자기 소음이나 상황 때문에 얼어붙었을 때",say:"I need a quick breather, I’ll be right back.",ko:"잠깐 숨 좀 돌리고 올게, 금방 돌아올게.",alt:"Give me just one minute, please.",altKo:"1분만 기다려줘."},
+  {sit:"When she doesn’t understand what a friend said",sitKo:"친구 말을 잘못 알아듣고 다시 설명해 달라고 할 때",say:"Sorry, what does that mean?",ko:"미안한데, 그게 무슨 뜻이야?",alt:"Could you say that a bit slower, please?",altKo:"조금만 천천히 말해줄 수 있어?"},
+  {sit:"When clearing up a misunderstanding",sitKo:"오해가 생겨 바로잡고 싶을 때",say:"That’s not what I meant. Let me explain.",ko:"그런 뜻으로 말한 게 아니야. 다시 설명해 줄게.",alt:"I think there was a misunderstanding.",altKo:"오해가 있었던 것 같아."},
+  {sit:"When she feels unsafe and needs an adult right now",sitKo:"안전하지 않다고 느껴 어른이 지금 필요할 때",say:"Please help me. I don’t feel safe.",ko:"도와주세요. 안전하다고 느껴지지 않아요.",alt:"I need to tell a grown-up right now.",altKo:"지금 바로 어른께 말씀드려야 해요."},
+  {sit:"When she forgot her supplies",sitKo:"준비물을 깜빡했을 때",say:"I forgot my pencil. Can I borrow one?",ko:"연필을 깜빡했어. 하나 빌려도 될까?",alt:"Could I borrow an eraser, please?",altKo:"지우개 좀 빌려도 될까?"},
+  {sit:"When she feels upset and can’t find the words",sitKo:"속상한데 말이 안 나올 때",say:"I feel upset right now.",ko:"나 지금 속상해.",alt:"I need a minute to calm down.",altKo:"마음을 가라앉힐 시간이 필요해."}]}
+];
+TABS.forEach(t=>t.cards.forEach((c,i)=>c.id=t.id+i));
+const ALL=TABS.flatMap(t=>t.cards);
+let done={},state={tab:0,idx:0,flipped:false,altOpen:false,group:'All',mode:'cards'};
+const KEY='speakup-progress-v3';
+try{done=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){done={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}};
+const $=id=>document.getElementById(id);
+const cards=()=>{const t=TABS[state.tab];return state.group==='All'?t.cards:t.cards.filter(c=>(c.group||'Basics')===state.group)};
+const groupsOf=t=>{const g=[...new Set(t.cards.map(c=>c.group||'Basics'))];return g.length>1?['All',...g]:[]};
+const GLABEL={All:'All',Basics:'Basics',"Freeze Tag":'Freeze Tag 얼음땡',"Left out":'Left out 따돌림 대응',"Small talk":'Small talk 스몰톡'};
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+function setColor(){
+  const c=TABS[state.tab].color;
+  const r=document.documentElement.style;
+  r.setProperty('--accent',`var(--c-${c})`);r.setProperty('--accent-soft',`var(--c-${c}-soft)`);r.setProperty('--accent-ink',`var(--c-${c}-ink)`);
+}
+function renderTabs(){
+  $('tabs').innerHTML=TABS.map((t,i)=>{
+    const n=t.cards.filter(c=>done[c.id]).length;
+    return `<button class="tab" role="tab" data-c="${t.id}" data-i="${i}" aria-selected="${i===state.tab}"><span>${esc(t.en)}</span><small>${esc(t.ko)}</small><span class="n">${n}/${t.cards.length}</span></button>`}).join('');
+}
+function renderProgress(){
+  const n=ALL.filter(c=>done[c.id]).length;
+  $('pcount').textContent=n+' / '+ALL.length;
+  $('pbar').style.width=(n/ALL.length*100)+'%';
+}
+function renderCard(){
+  const list=cards(),c=list[state.idx];
+  const card=$('card');
+  card.dataset.flipped=state.flipped;
+  card.setAttribute('aria-label',state.flipped?'Card back. Tap to see the situation.':'Card front. Tap to see what to say.');
+  card.innerHTML=`<div class="card-inner">
+    <div class="face front"><div class="tag">${esc(c.step||"What’s happening")}</div>
+      <p class="sit">${esc(c.sit)}</p><p class="sit-ko ko">${esc(c.sitKo)}</p>
+      <div class="hint">Say your answer out loud, then tap the card to flip.</div></div>
+    <div class="face back"><div class="tag">What to say</div>
+      <div class="sayrow"><p class="say">${esc(c.say)}</p><button class="chip sp2" id="hearEn" aria-label="Listen to this phrase"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button></div><p class="say-ko ko">${esc(c.ko)}</p>${c.note?`<p class="note2 ko">${esc(c.note)}</p>`:""}</div></div>`;
+  $('count').textContent=`${state.idx+1} / ${list.length} · swipe ↔`;
+  $('altEn').textContent=c.alt;$('altKoText').textContent=c.altKo;
+  $('altPanel').hidden=!state.altOpen;$('altToggle').setAttribute('aria-expanded',state.altOpen);
+}
+function renderList(){
+  $('list').innerHTML=cards().map(c=>`<li><label><input type="checkbox" data-id="${c.id}" ${done[c.id]?'checked':''}><span class="t"><span class="s">${esc(c.sit)}</span><span class="p">${esc(c.say)}</span><span class="k">${esc(c.ko)}</span><span class="s">Shorter: <b>${esc(c.alt)}</b> <span class="ko">${esc(c.altKo)}</span></span></span></label><button class="chip sp" data-say="${c.id}" aria-label="Listen to this phrase"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></button><button class="chip sp" data-alt="${c.id}" aria-label="Listen to the shorter phrase">Shorter</button></li>`).join('');
+}
+function renderGroups(){
+  const g=groupsOf(TABS[state.tab]);const el=$('groups');
+  el.hidden=!g.length;
+  el.innerHTML=g.map(x=>`<button class="gchip" data-g="${esc(x)}" aria-pressed="${x===state.group}">${esc(GLABEL[x]||x)}</button>`).join('');
+}
+function render(){
+  setColor();renderTabs();renderGroups();renderProgress();
+  $('cardsView').hidden=state.mode!=='cards';$('listView').hidden=state.mode!=='list';
+  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===state.mode));
+  if(state.mode==='cards')renderCard();else renderList();
+}
+const cur=()=>cards()[state.idx];
+function go(d){
+  const n=cards().length;state.idx=(state.idx+d+n)%n;state.flipped=false;state.altOpen=false;stopAudio();render();
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&$('card').animate)
+    $('card').animate([{transform:`translateX(${d>0?40:-40}px)`,opacity:.2},{transform:'none',opacity:1}],{duration:220,easing:'ease-out'});
+}
+$('groups').addEventListener('click',e=>{const b=e.target.closest('.gchip');if(!b)return;stopAudio();state.group=b.dataset.g;state.idx=0;state.flipped=false;state.altOpen=false;render()});
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;state.tab=+b.dataset.i;state.group='All';state.idx=0;state.flipped=false;state.altOpen=false;render()});
+document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{state.mode=b.dataset.mode;render()}));
+let sx=0,sy=0,swiped=false;
+$('card').addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;swiped=false});
+$('card').addEventListener('pointerup',e=>{
+  const dx=e.clientX-sx,dy=e.clientY-sy;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5){swiped=true;go(dx<0?1:-1)}
+});
+$('card').addEventListener('click',e=>{
+  const h=e.target.closest('#hearEn');
+  if(h){e.stopPropagation();say([enP(cur())],h);return}
+  if(swiped){swiped=false;return}
+  state.flipped=!state.flipped;renderCard()});
+$('card').addEventListener('keydown',e=>{if(e.target===$('card')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();state.flipped=!state.flipped;renderCard()}});
+$('altToggle').addEventListener('click',()=>{state.altOpen=!state.altOpen;renderCard()});
+$('prev').addEventListener('click',()=>go(-1));
+$('next').addEventListener('click',()=>go(1));
+$('list').addEventListener('change',e=>{const id=e.target.dataset.id;if(!id)return;done[id]=e.target.checked;save();renderProgress();renderTabs()});
+$('reset').addEventListener('click',()=>{done={};save();render()});
+document.addEventListener('keydown',e=>{
+  if(state.mode!=='cards'||e.target.closest('input'))return;
+  if(e.key==='ArrowRight')go(1);else if(e.key==='ArrowLeft')go(-1);
+});
+/* ---- Listening (browser text-to-speech) ---- */
+const synth=window.speechSynthesis;let voices=[];
+function loadVoices(){if(!synth)return;voices=synth.getVoices();checkVoices()}
+function pick(lang){
+  const v=voices.filter(x=>x.lang.toLowerCase().replace('_','-').startsWith(lang));
+  if(!v.length)return null;
+  const kid=/junior|kathy|child|kid|young|girl|boy/i,fem=/samantha|ava|allison|susan|zira|aria|jenny|karen|serena|victoria|fiona|moira|tessa|google us english/i;
+  const local=v.filter(x=>x.localService);
+  return v.find(x=>kid.test(x.name))||local.find(x=>fem.test(x.name))||v.find(x=>fem.test(x.name))||local.find(x=>x.lang.toLowerCase().replace('_','-')==='en-us')||v.find(x=>x.lang.toLowerCase().replace('_','-')==='en-us')||v[0];
+}
+function checkVoices(){}
+if(synth){loadVoices();synth.onvoiceschanged=loadVoices}
+function say(parts,btn){
+  if(!synth)return;
+  synth.cancel();
+  document.querySelectorAll('.chip.playing').forEach(b=>b.classList.remove('playing'));
+  if(btn)btn.classList.add('playing');
+  parts.forEach((p,i)=>{
+    const u=new SpeechSynthesisUtterance(p.text);
+    u.lang=p.lang==='ko'?'ko-KR':'en-US';
+    const v=pick(p.lang);if(v)u.voice=v;
+    u.rate=0.95;u.pitch=1.7;
+    if(i===parts.length-1){u.onend=u.onerror=()=>btn&&btn.classList.remove('playing')}
+    synth.speak(u);
+  });
+}
+const enP=c=>({text:c.say,lang:'en'});
+$('hearAlt').addEventListener('click',e=>say([{text:cur().alt,lang:'en'}],e.currentTarget));
+$('list').addEventListener('click',e=>{const b=e.target.closest('[data-say],[data-alt]');if(!b)return;const isAlt=!!b.dataset.alt;const c=ALL.find(x=>x.id===(b.dataset.say||b.dataset.alt));say(isAlt?[{text:c.alt,lang:'en'}]:[enP(c)],b)});
+function stopAudio(){if(synth)synth.cancel()}
+$('prev').addEventListener('click',stopAudio);$('next').addEventListener('click',stopAudio);
+$('tabs').addEventListener('click',stopAudio);
+render();
+</script>
+</body>
+</html>
